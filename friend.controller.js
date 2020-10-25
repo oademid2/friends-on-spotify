@@ -6,8 +6,8 @@ var SpotifyWebApi = require('spotify-web-api-node');
 scopes = ['user-top-read']//, 'user-read-private', 'user-read-email']//,'playlist-modify-public','playlist-modify-private']
 var DEST = "http://localhost:3000"; //'https://agile-beyond-63487.herokuapp.com'
 var HOST = "http://localhost:1234"; //'https://agile-beyond-63487.herokuapp.com'
-var DEST = 'https://friendsonspotify.herokuapp.com'
-var HOST = 'https://friendsonspotify.herokuapp.com'
+//var DEST = 'https://friendsonspotify.herokuapp.com'
+//var HOST = 'https://friendsonspotify.herokuapp.com'
 var client_id = "73e90db024fc4168853c3320202e37d5"; // Your client id
 var client_secret = "19426ec3794742f281b73bd1e3e82783"; // Your secret
 var redirect_uri = HOST+'/callback'; // Your redirect uri// uri that works 'http://localhost:1234/callback'
@@ -38,22 +38,17 @@ var deploytest = 'build/client/public/index.html';
 
 ///client/build/index.html
 exports.serve = function (req, res){
-    //res.sendFile(path.join(__dirname+'/client/build/index.html'));
-    res.json(["pas"]);
+    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+    //res.json(["pas"]);
   };
 
 ///build/client/index.html'
 exports.login = function(req,res,next){
     var html = spotifyApi.createAuthorizeURL(scopes)
-
     res.send(html+"&show_dialog=true")  
+    //res.redirect(html+"&show_dialog=true")
 }
 
-exports.generate = function(req,res,next){
-    var html = spotifyApi2.createAuthorizeURL(scopes)
-
-    res.send(html+"&show_dialog=true")  
-}
 
 exports.callback = async function (req,res) {
     const { code } = req.query;
@@ -63,14 +58,62 @@ exports.callback = async function (req,res) {
       const { access_token, refresh_token } = data.body;
       spotifyApi.setAccessToken(access_token);
       spotifyApi.setRefreshToken(refresh_token);
+      console.log("Access: ",access_token)
   
       //res.send(access_token);
-      res.redirect(DEST+"/?token="+access_token)
+      res.redirect(DEST+"/viewprofile/?token="+access_token)
     } catch(err) {
       res.redirect('/#/error/invalid token');
       console.log(err)
     }
-  };
+};
+
+exports.create_profile = function (req, res,next) {
+
+    Friend.findOneAndUpdate({username: req.body.username}, {$set:{display_name:"test"}}, {returnOriginal:true}, (err, doc) => {
+        console.log(doc)
+        if (!doc) {
+            let friend = new Friend({
+                username: req.body.username,
+                display_name: req.body.display_name,
+                topArtists: req.body.topArtists,
+                topSongs: req.body.topSongs
+
+            })
+            console.log("new created")
+
+            friend.save(function(err) {
+                if (err)
+                    res.send(err);
+
+                res.json({ message: 'friend created!' });
+            });
+        }else{
+            res.json(doc);
+        }
+     
+
+});
+
+};
+
+
+exports.find_profile = function (req, res) {
+    Friend.findOne({username: req.params.username}).exec()
+    .then(function(friend, err) {
+         if (err) 
+            return next(err);
+         return res.send(friend);
+     })
+ };
+
+
+
+  exports.generate = function(req,res,next){
+    var html = spotifyApi2.createAuthorizeURL(scopes)
+
+    res.send(html+"&show_dialog=true")  
+}
 
   exports.gencallback = async function (req,res) {
     const { code } = req.query;

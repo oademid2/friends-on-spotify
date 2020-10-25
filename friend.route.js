@@ -5,13 +5,19 @@ const router = express.Router();
 const friend_controller = require('./friend.controller');
 
 // a simple test url to check that all of our files are communicating correctly.
+router.get('/api/qrZtyoP/login', friend_controller.login);
+router.get('/api/qrZtyoP/test', friend_controller.test);
+router.get('/callback', friend_controller.callback);
+router.put('/api/qrZtyoP/createProfile', friend_controller.create_profile);
+router.get('/api/qrZtyoP/loadfriend/:username', friend_controller.find_profile);
+
+
+
+
 router.put('/api/qrZtyoP/spotifylogin/:username', friend_controller.spotifyLogin);
 router.get('/api/qrZtyoP/loadfriend/:username', friend_controller.loadfriend);
 router.put('/api/qrZtyoP/updatefriend/:username', friend_controller.updateFriend);
-router.get('/api/qrZtyoP/login', friend_controller.login);
-router.get('/callback', friend_controller.callback);
 router.get('/api/qrZtyoP/generate', friend_controller.generate);
-router.get('/api/qrZtyoP/test', friend_controller.test);
 router.get('*', friend_controller.serve);
 
 

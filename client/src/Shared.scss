@@ -1,0 +1,374 @@
+.profile-container { 
+    height: 100vh;
+    display:block;
+    color:white;
+    background:linear-gradient(120deg, #1db954, #191414);
+    overflow: scroll;
+  }
+
+.profile-title-container{
+    height:100%;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    width:100%;
+    padding:40px;
+    overflow-y: scroll;
+}
+
+.profile-landing-title{
+    font-family: "Proxima Nova", "Futura", "Gotham", Helvetica,"Graphik Web",  Arial, Verdana, sans-serif;
+    font-size: 1.5rem;
+  color:white;    
+  width:100%;
+  margin-top:0px;
+  margin-bottom: 10px;
+  letter-spacing:1px;
+
+  font-weight:bold;
+}
+
+.ranking-container{
+    color:white;
+    //background-color: pink;
+    padding:0px;
+    margin:0px;
+    
+}
+
+.ranking-section{
+    color:white;
+    //background-color: blue;
+    padding: 0px 0 7px 0;
+    padding:12px;
+    margin:0px;
+    width:100%;
+
+}
+
+
+.ranking-section-title{
+    color:white;
+    font-weight: 600;
+    margin-bottom:0px;
+    margin-top: 0px;
+    //background-color: red;
+    padding: 0px 0 10px 0;
+}
+
+.shared-card{
+    width:15%;
+    height:auto;
+    display: inline-block;
+    text-align: center;
+
+    margin-top: 0px;
+    margin-bottom:0px;
+    padding:0px;
+    vertical-align: top;
+    //background-color: purple;
+}
+
+.ranking-card-title{
+    margin:0px;
+    padding:0px;
+    font-size:10px;
+    font-weight: 900;
+
+    //Centered text
+    text-align: center;
+}
+
+.ranking-card-subtitle{
+    margin:0px;
+    padding:0px;
+    font-size:10px;
+
+    //centered text
+    text-align: center;
+}
+
+.ranking-card-text{
+
+    padding: 7px 0px 0px 10px;
+    margin: 0px 0px 0px 0px;
+    //display: inline-block;
+    color:white;
+
+    display: block;
+
+    //centered text
+    margin:auto;
+    margin: 0px;
+    padding: 5px 10px;
+    text-align: center;
+
+    
+}
+
+
+.ranking-card-img{
+    max-height: 100px;
+    margin:0px;
+    padding: 0 0;
+    display: block;
+
+    ///centered text
+    vertical-align: top;
+    margin:auto;
+    margin-top:5px;
+    
+}
+
+.sharing-link{
+    background-color: white;
+    color:black;
+    margin: 0px 90px;;
+}
+
+.dark-green-bg{
+    background-color: #144325;;
+    //all
+}
+
+
+
+
+@media screen and (max-width: 600px) {
+    .profile-title-container{
+        margin: 0;
+        position: relative;
+        top: 0%;
+        left: 50%;
+        -ms-transform: translate(-50%, 0%);
+        transform: translate(-50%, 0%);
+        width:100%;
+        padding:40px;
+        overflow-y: scroll;
+    }
+    
+    .ranking-container{
+        color:white;
+        //background-color: pink;
+        padding:0px;
+        margin:0px;
+        margin-top:30px;
+        
+    }
+    
+    .ranking-section{
+        color:white;
+        //background-color: blue;
+        padding: 0px 0 7px 0;
+        padding:0px;
+        margin:0px;
+        margin-bottom: 15px;
+        width:100%;
+    
+    }
+    
+    
+    .ranking-section-title{
+        color:white;
+        font-weight: 600;
+        margin-bottom:5px;
+        margin-top: 0px;
+        //background-color: red;
+        padding: 0px 0 10px 0;
+    }
+    
+    .ranking-card{
+        width:40%;
+        height:auto;
+        display: inline-block;
+        text-align: center;
+        //background-color: yellow;
+    
+        margin-top: 0px;
+        margin-bottom:0px;
+        padding:0px;
+        margin:5px 5px; 
+        vertical-align: top;
+        //background-color: purple;
+    }
+    
+    .ranking-card-title{
+        margin:0px;
+        padding:0px;
+        font-size:10px;
+        font-weight: 900;
+    
+        //Centered text
+        text-align: center;
+    }
+    
+    .ranking-card-subtitle{
+        margin:0px;
+        padding:0px;
+        font-size:10px;
+    
+        //centered text
+        text-align: center;
+    }
+    
+    .ranking-card-text{
+    
+        padding: 7px 0px 0px 10px;
+        margin: 0px 0px 0px 0px;
+        //display: inline-block;
+        color:white;
+    
+        display: block;
+    
+        //centered text
+        margin:auto;
+        margin: 0px;
+        padding: 5px 0px;
+        text-align: center;
+    
+        
+    }
+    
+    
+    .ranking-card-img{
+        max-height: 100px;
+        max-width: 100px;
+        min-height: 100px;
+        min-width: 100px;
+        margin:0px;
+        padding: 0 0;
+        display: block;
+    
+        ///centered text
+        vertical-align: top;
+        margin:auto;
+        margin-top:5px;
+        
+    }
+    
+    .sharing-link{
+        background-color: white;
+        color:black;
+        margin: 0px 90px;;
+    }
+    
+    .dark-green-bg{
+        background-color: #144325;;
+        //all
+    }
+
+
+    
+}
+
+
+
+/*
+
+
+    .sharedview-caption{
+        font-family: "Graphik Web", Helvetica, Arial, Verdana, sans-serif;
+        color:white;
+        font-size: 12px;
+        font-weight: 600;
+        margin:0px;
+        padding: 0 00px;
+        text-align: center;
+      }
+
+
+.ranking-card{
+    width:30%;
+    height:150px;
+display: inline-block;
+    text-align: center;
+
+    margin-top: 0px;
+    margin-bottom:0px;
+    vertical-align: top;
+}
+
+.ranking-card-title{
+    margin:0px;
+    padding:0px;
+    font-size:60%;
+    font-weight: 900;
+
+    //Centered text
+    text-align: center;
+}
+
+.ranking-card-subtitle{
+    margin:0px;
+    padding:0px;
+    font-size:10px;
+
+    //centered text
+    text-align: center;
+}
+
+.ranking-card-text{
+
+    padding: 7px 0px 0px 10px;
+    margin: 0px 0px 0px 0px;
+    //display: inline-block;
+    color:white;
+
+    display: block;
+
+    //centered text
+    margin:auto;
+    margin: 0px;
+    padding: 5px 10px;
+    text-align: center;
+
+    
+}
+
+.ranking-card-img{
+    //@at-root: 30%;
+    max-height: 10px;
+    margin:0px;
+    margin-bottom:5px;
+    //vertical-align: top;
+    display: block;
+
+    ///centered text
+   vertical-align: top;
+    margin:auto;
+    margin-top:5px;
+    
+    
+    
+}
+
+
+.sharedview-caption{
+    font-family: Helvetica, Arial, Verdana, sans-serif;
+    color:white;
+    font-size: 9px;
+    font-weight: 0;
+    margin:0px;
+    padding: 0 10px;
+    text-align: center;
+  }
+
+  .shared-btn{
+    background-color: #0e1e14;
+    color: white;
+    font-size: 10px;
+    padding: 8px 15px;
+    font-family: "Proxima Nova", "Futura", "Gotham", Helvetica,"Graphik Web",  Arial, Verdana, sans-serif;
+    font-weight: 700;
+    border-radius: 7px;
+    border: none;
+    margin-top:20px;
+}
+
+
+
+
+*/
