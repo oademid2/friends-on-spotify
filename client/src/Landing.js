@@ -12,7 +12,6 @@ const { Header} = Layout;
 
 
 //PROD//
-const LINK = 'http://localhost:3000';
 
 class Landing extends Component{
 

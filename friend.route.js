@@ -14,17 +14,4 @@ router.get('/api/qrZtyoP/loadfriend/:username', friend_controller.loadfriend);
 router.get('*', friend_controller.serve);
 
 
-
-/*
-router.put('/api/spotifylogin/:username', friend_controller.spotifyLogin);
-router.get('/api/loadfriend/:username', friend_controller.loadfriend);
-router.put('/api/updatefriend/:username', friend_controller.updateFriend);
-router.get('/api/login', friend_controller.login);
-router.get('/callback', friend_controller.callback);
-router.get('/api/generate', friend_controller.generate);
-router.get('/api/test', friend_controller.test);
-router.get('*', friend_controller.serve);
-
-*/
-
 module.exports = router;
