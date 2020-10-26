@@ -11,6 +11,7 @@ class api {
     static myToken = '';
     static myUser = '';
     static theirUser = '';
+    static HOST = "localhost:3000"
     static _url = "/api/qrZtyoP";
 
     static getProfile = (tkn) =>{
@@ -82,9 +83,56 @@ class api {
         return apiCompletionPromise;
     }
 
+    static loadFriend = (usrname) => {
+
+        const apiCompletionPromise = request({
+            method: 'get',
+            url: this._url + '/loadfriend/' +usrname,
+        })
+
+        //todo: put in database
+        return apiCompletionPromise;
+    }
+
+    static reset = (props)=>{
+            localStorage.clear();
+            props.history.push("/")
+    }
 
 
 
+    static setToken(tkn){
+        localStorage.setItem("token", tkn)
+        localStorage.setItem("timestamp", Date().time)
+    }
+
+    static tokenIsValid(){
+        
+        
+        let tkn = localStorage.getItem("token")
+        if(!tkn) return false
+    
+        let now = Date().time;
+        let then = localStorage.getItem("timestamp")
+        let diff = (now - then)/100
+        if(diff > 3400)return false;
+        
+    }
+
+    static userIsValid(){
+        let usr = localStorage.getItem("username")
+        if(!usr)return false;
+        else return true;
+    }
+
+    static getUser(){
+        return localStorage.getItem("username")
+    }
+    
+
+}
+
+/*
 
     
     static setToken = (tkn)=>{
@@ -212,11 +260,11 @@ class api {
         return apiCompletionPromise;
     }
 
-    
 
-}
 
-//api.token = 'BQBchIy-uI4SGsFVAJIj0ooYg6F1XndZLIG-g1d4kj-xiKJwpRL4za45pt_OpGcsE84h2CbIwuDIXD93UVWC1d6etZo505tKhLORD0fco953iJO-PAUG4P7xRaR0XomXkszSFznVCoAKTkcoesekBzGzl5W43S7mc1JA19PUr0qeR0FbtaY'
+*/
+
+
 
 
 export default api;

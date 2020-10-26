@@ -6,7 +6,6 @@ let FriendSchema = new Schema({
     email: {type: String, required: false},
     topArtists: {type: Object, required: false},
     topSongs: {type: Object, required: false},
-    network: {type: Array, required: false},
     display_name: {type: String, required: false}
 });
 

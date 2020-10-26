@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import HomePage from './HomePage';
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 
 
@@ -21,9 +20,11 @@ function App() {
       <Router >
      
      <Switch>
-     <Route path='/profile' component={HomePage}/>
+     
+     <Route path='/demo' component={Comparison}/>
      <Route path='/viewprofile' component={Profile}/>
-       <Route path='/' component={Comparison}/>
+       <Route path='/compare' component={Comparison}/>
+       <Route path='/' component={Landing}/>
        
      </Switch>
     </Router>

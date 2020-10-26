@@ -61,11 +61,24 @@ class Shared extends Component{
   }
  
   componentDidMount() {
+    //if(localStorage.getItem("comparison"))this.props.history.push("/compare/user/"+localStorage.getItem("comparison"))
     let tkn = window.location.href.split("?token=")[1]
-    tkn = "BQDNa1laRxIREC1Y6QPd19JVVG3Zo-T77154-YAyZcXsbxxq0bYgKpUSLyDcMvmK_ct2IVa2TqlD_VobYe_1WG15pE_aLcMkcxzafa_NMR9qQPV12yxe99lgmu_GHeeL8hDa6uy8Fjq9PvK-BsigBur7OwKUAHDuD68MndZTKN-rCw";
-
+    //tkn = "BQDNa1laRxIREC1Y6QPd19JVVG3Zo-T77154-YAyZcXsbxxq0bYgKpUSLyDcMvmK_ct2IVa2TqlD_VobYe_1WG15pE_aLcMkcxzafa_NMR9qQPV12yxe99lgmu_GHeeL8hDa6uy8Fjq9PvK-BsigBur7OwKUAHDuD68MndZTKN-rCw";
     let pageId = window.location.href.split("viewprofile/usr/")[1]
-    pageId = "z1m3os116mvplpoe023f8uxkc";
+    this.setState({pageId: pageId})
+
+    if(localStorage.getItem("comparison")){
+      
+      if(localStorage.getItem("username")){
+        this.props.history.push("/compare/user/"+localStorage.getItem("comparison"))
+        return
+      }//cookie
+      api.getProfile(tkn).then((result)=>{
+        localStorage.setItem("username",result.data.id )
+        this.props.history.push("/compare/user/"+localStorage.getItem("comparison"))
+      })
+    }
+
 
     if(pageId){
       api.loadProfile(pageId).then((result)=>{
@@ -85,6 +98,7 @@ class Shared extends Component{
         display_name: result.data.display_name,
         username: result.data.id
       }
+      this.setState({pageId: result.data.id})
       localStorage.setItem("username",result.data.id )
       this.setState({user:_user})
           //get the artist rankings
@@ -157,12 +171,25 @@ topRankingFromDict(_dict){
 
 
  simulatedLogin = ()=>{
-   console.log("click")
+  
   api.simulatedLogin().then((res)=>{
     console.log(res.data)
     console.log('redirecting through spotify....')
     window.location.href = res.data
   })
+ }
+
+ compare = ()=>{
+  
+  localStorage.setItem("comparison",this.state.pageId) //store so that when it comes back we know to redirect
+  //cookie
+  if(api.userIsValid()){   
+   
+      this.props.history.push("/compare/user/"+localStorage.getItem("comparison"))
+      return
+
+  }
+  else this.simulatedLogin()
  }
 copyLink = () => {
   let link = document.getElementsByClassName("sharing-link")[0]
@@ -182,6 +209,8 @@ return (
 <div className="profile-container">
 
   <div className="profile-title-container" >
+  <a href="https://www.linkedin.com/in/kitan-ademidun-881330149/" className="my-link">created by kitan ademidun</a>
+    
 
 <p className="profile-title-subcaption"> {this.state.user.display_name? this.state.user.display_name : this.state.user.username}</p>
     <h1 className="profile-landing-title">FRIENDS ON SPOTIFY</h1>
@@ -230,16 +259,20 @@ return (
   
   </div>
 
-{this.state.pageId == this.state.user.username?
+{this.state.pageId == localStorage.getItem("username")?
 (  <div className="">
 <p className="">Share your top 5 with friends and they can get a similary score of your top 50!</p>
-<p className="sharing-link">Link</p>
-<button className = "themed-btn dark-green-bg" onClick={this.simulatedLogin}>Copy This Link</button>
+<p className="sharing-link"><a href="">{api.HOST}/viewprofile/{localStorage.getItem("username")}</a></p>
+<a class= "themed-btn dark-green-bg" href="https://twitter.com/intent/tweet?text=Hello%20world">tweet</a>
+<button className = "themed-btn dark-green-bg" onClick={this.copyLink}>Copy This Link</button>
+{api.userIsValid()?<button onClick={()=> api.reset(this.props) } className = "themed-btn">logout</button> : <span></span>}
 
 </div>):
   (  <div className="">
-  <p className="">Compare to your top 50 and get a similary score!</p>
-  <button className = "themed-btn dark-green-bg" onClick={this.simulatedLogin}>Compare</button>
+  <p className="">Compare to your top 50 and let them send you their similarity score!</p>
+  <button className = "themed-btn dark-green-bg" onClick={this.compare}>Compare</button>
+  {api.userIsValid()?<button onClick={()=> api.reset(this.props) } className = "themed-btn">logout</button> : <span></span>}
+
 
   </div>)}
 
