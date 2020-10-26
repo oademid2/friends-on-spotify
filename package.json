@@ -18,6 +18,15 @@
     "express": "^4.17.1",
     "mongoose": "^5.10.10",
     "path": "^0.12.7",
-    "spotify-web-api-node": "^5.0.0"
+    "spotify-web-api-node": "^5.0.0",
+    "antd": "^4.6.6",
+    "axios": "^0.20.0",
+    "react-circular-progressbar": "^2.0.3",
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.0",
+    "react-share": "^4.3.1",
+    "web-vitals": "^0.2.4",
+    "node-sass": "^4.14.1"
   }
 }

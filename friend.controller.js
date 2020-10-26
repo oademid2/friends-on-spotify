@@ -24,7 +24,6 @@ var spotifyApi = new SpotifyWebApi({
 ///client/build/index.html
 exports.serve = function (req, res){
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
-    //res.json(["pas"]);
   };
 
 ///build/client/index.html'
