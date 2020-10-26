@@ -27,8 +27,4 @@ router.get('*', friend_controller.serve);
 
 */
 
-router.get('/gencallback', friend_controller.gencallback);
-router.post('/friend', friend_controller.friend_create2);
-
-
 module.exports = router;
