@@ -6,6 +6,10 @@ var SpotifyWebApi = require('spotify-web-api-node');
 scopes = ['user-top-read']//, 'user-read-private', 'user-read-email']//,'playlist-modify-public','playlist-modify-private']
 var DEST = "https://floating-lake-89604.herokuapp.com"//"http://localhost:3000"; //'https://agile-beyond-63487.herokuapp.com'
 var HOST = "https://floating-lake-89604.herokuapp.com"//""http://localhost:1234"; //'https://agile-beyond-63487.herokuapp.com'
+var DEST = "http://localhost:3000"//"https://floating-lake-89604.herokuapp.com"//"http://localhost:3000"; //'https://agile-beyond-63487.herokuapp.com'
+var HOST = "http://localhost:1234"//"https://floating-lake-89604.herokuapp.com"//""http://localhost:1234"; //'https://agile-beyond-63487.herokuapp.com'
+
+
 var client_id = "73e90db024fc4168853c3320202e37d5"; // Your client id
 var client_secret = "19426ec3794742f281b73bd1e3e82783"; // Your secret
 var redirect_uri = HOST+'/callback'; // Your redirect uri// uri that works 'http://localhost:1234/callback'

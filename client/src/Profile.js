@@ -2,6 +2,7 @@ import React, { Component, createElement } from 'react';
 
 import './Shared.scss'
 import api from './api'
+import loadImg from './loading.gif'
 
 class Shared extends Component{
 
@@ -21,43 +22,30 @@ class Shared extends Component{
       allArtists: [],
       allSongs:[],
       sharedArtists:[
-        {name:"Burna Boy",
-          id:"3wcj11K77LjEY1PkEazffa1",
-          rank : 1,
-          imgSrc: "https://i.scdn.co/image/17755d54631ecbc0c40d327738bcfc5287dd9aff"},
-          {name:"Burna Boy",
-          id:"3wcj11K77LjEY1PkEazffa2",
-          rank :1,
-          imgSrc: "https://i.scdn.co/image/17755d54631ecbc0c40d327738bcfc5287dd9aff"},
-          {name:"Burna Boy",
-          id:"3wcj11K77LjEY1PkEazffa3",
-          rank :1,
-          imgSrc: "https://i.scdn.co/image/17755d54631ecbc0c40d327738bcfc5287dd9aff"},
-          {name:"Burna Boy",
-          id:"3wcj11K77LjEY1PkEazffa4",
-          rank :1,
-          imgSrc: "https://i.scdn.co/image/17755d54631ecbc0c40d327738bcfc5287dd9aff"},
-          {name:"Burna Boy",
-          id:"3wcj11K77LjEY1PkEazffa5",
-          rank :1,
-          imgSrc: "https://i.scdn.co/image/17755d54631ecbc0c40d327738bcfc5287dd9aff"}
-      ],
-      sharedSongs: [
-        {name:"From The D To The A (feat. Lil Yachty)",
-        id:"2NyrXRn4tancYPW6JwtTl2a",
-        rank : 1,
-        imgSrc: "https://i.scdn.co/image/ab67616d0000b273a64fac177809a71bf0a2ffee"},
-        {name:"From The D To The A (feat. Lil Yachty)",
-        id:"2NyrXRn4tancYPW6JwtTl2b",
-        rank : 1,
-        imgSrc: "https://i.scdn.co/image/ab67616d0000b273a64fac177809a71bf0a2ffee"},
-        {name:"From The D To The A (feat. Lil Yachty)",
-        id:"2NyrXRn4tancYPW6JwtTl2c",
-        rank : 1,
-        imgSrc: "https://i.scdn.co/image/ab67616d0000b273a64fac177809a71bf0a2ffee"},
-      ],
+        this.loading("AA"),
+        this.loading("BB"),
+        this.loading("CC")
+ 
+       ],
+       sharedSongs: [
+         this.loading("AA"),
+         this.loading("BB"),
+         this.loading("CC")
+ 
+       ],
       isLoading: true
     };
+  }
+ 
+  loading(_id){
+
+    return{
+      name:"Loading",
+      id: _id,
+      rank : 0,
+      imgSrc: loadImg
+    }
+
   }
  
   componentDidMount() {
@@ -262,7 +250,7 @@ return (
 {this.state.pageId == localStorage.getItem("username")?
 (  <div className="">
 <p className="">Share your top 5 with friends and they can get a similary score of your top 50!</p>
-<p className="sharing-link"><a href="">{api.HOST}/viewprofile/{localStorage.getItem("username")}</a></p>
+<p className="sharing-link"><a href="">{api.HOST}/viewprofile/usr/{localStorage.getItem("username")}</a></p>
 <a class= "themed-btn dark-green-bg" href="https://twitter.com/intent/tweet?text=Hello%20world">tweet</a>
 <button className = "themed-btn dark-green-bg" onClick={this.copyLink}>Copy This Link</button>
 {api.userIsValid()?<button onClick={()=> api.reset(this.props) } className = "themed-btn">logout</button> : <span></span>}
@@ -292,3 +280,29 @@ return (
 };
 
 export default Shared
+
+
+/*
+
+
+  {name:"Burna Boy",
+          id:"3wcj11K77LjEY1PkEazffa1",
+          rank : 1,
+          imgSrc: "https://i.scdn.co/image/17755d54631ecbc0c40d327738bcfc5287dd9aff"},
+
+          */
+
+/*
+  loading(_id){
+
+    return{
+      name:"Loading",
+      id: _id,
+      rank : 0,
+      imgSrc: "https://images.app.goo.gl/1CVfeqYHyEtu8MW17"
+    }
+
+  }
+
+
+*/

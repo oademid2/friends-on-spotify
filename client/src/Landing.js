@@ -11,7 +11,6 @@ const { Header} = Layout;
 
 
 
-//PROD//
 
 class Landing extends Component{
 
@@ -57,7 +56,7 @@ return (
             <img className ="landing-img" src={titleImg}></img><br></br>
             <p className="landing-caption"> How it works? When you get your top plays you get a link you can share with friends. By clicking a friends link you can sign in an automatically compare your listens that you have in common. </p>
             <Button onClick={this.viewProfile} className = "themed-btn">Get Started</Button>
-            <Button onClick={()=> api.reset(this.props) } className = "themed-btn">reset</Button>
+            <Button href="/demo" className = "themed-btn">view demo</Button>
        
             </div>
        

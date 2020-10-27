@@ -7,6 +7,7 @@ import api from './api'
 import { CircularProgressbar } from 'react-circular-progressbar';
 import "react-circular-progressbar/dist/styles.css";
 import './Comparison.scss'
+import loadImg from './loading.gif'
 
 //import PercentageCircle from 'reactjs-percentage-circle';
 
@@ -42,9 +43,14 @@ class Shared extends Component{
    
     this.simulatedLogin = this.simulatedLogin.bind(this);
     this.viewAll = this.viewAll.bind(this)
-    
+
     this.timerID = 0;
     this.timerID2 = 0;
+    this.timer={
+      a:'',
+      b:'',
+      p: ''
+    }
     this.state = { 
       user:{
         display_name:'',
@@ -59,60 +65,50 @@ class Shared extends Component{
         a: 7,
         b: 7
       },
+      
       percent: 0,
       artistsNum: 0,
       songsNum: 0,
       score:0,
       sharedArtists:[
-        {name:"Loading rtist",
-          id:"AA",
-          rank : 1,
-          imgSrc: "https://images.app.goo.gl/1CVfeqYHyEtu8MW17"},
-          {name:"Burna Boy",
-          id:"3wcj11K77LjEY1PkEazffa2",
-          rank :1,
-          imgSrc: "https://i.scdn.co/image/17755d54631ecbc0c40d327738bcfc5287dd9aff"},
-          {name:"Burna Boy",
-          id:"3wcj11K77LjEY1PkEazffa3",
-          rank :1,
-          imgSrc: "https://i.scdn.co/image/17755d54631ecbc0c40d327738bcfc5287dd9aff"},
-          {name:"Burna Boy",
-          id:"3wcj11K77LjEY1PkEazffa4",
-          rank :1,
-          imgSrc: "https://i.scdn.co/image/17755d54631ecbc0c40d327738bcfc5287dd9aff"},
-          {name:"Burna Boy",
-          id:"3wcj11K77LjEY1PkEazffa5",
-          rank :1,
-          imgSrc: "https://i.scdn.co/image/17755d54631ecbc0c40d327738bcfc5287dd9aff"}
+       this.loading("AA"),
+       this.loading("BB"),
+       this.loading("CC")
+
       ],
       sharedSongs: [
-        {name:"From The D To The A (feat. Lil Yachty)",
-        id:"2NyrXRn4tancYPW6JwtTl2a",
-        rank : 1,
-        imgSrc: "https://i.scdn.co/image/ab67616d0000b273a64fac177809a71bf0a2ffee"},
-        {name:"From The D To The A (feat. Lil Yachty)",
-        id:"2NyrXRn4tancYPW6JwtTl2b",
-        rank : 1,
-        imgSrc: "https://i.scdn.co/image/ab67616d0000b273a64fac177809a71bf0a2ffee"},
-        {name:"From The D To The A (feat. Lil Yachty)",
-        id:"2NyrXRn4tancYPW6JwtTl2c",
-        rank : 1,
-        imgSrc: "https://i.scdn.co/image/ab67616d0000b273a64fac177809a71bf0a2ffee"},
+        this.loading("AA"),
+        this.loading("BB"),
+        this.loading("CC")
+
       ],
       isLoading: true
     };
 
    
   }
+
+  loading(_id){
+
+    return{
+      name:"Loading",
+      id: _id,
+      rank : 0,
+      imgSrc: loadImg
+    }
+
+  }
  
   componentDidMount() {
     
     let viewingUser = {}
     let viewedUser = {}
-    let themId = localStorage.getItem("comparison")
+    let usrcomp = window.location.href.split("/compare/user")[1]
+    let themId = localStorage.getItem("comparison") || usrcomp;
     let myId = localStorage.getItem("username")
 
     let demo = window.location.href.split("/compare/")[1]
+   
     if(demo == "demo"){
       this.setState({demo: demo})
       themId = "ademidunt"
@@ -126,33 +122,50 @@ class Shared extends Component{
     
 
     api.loadFriend(myId).then((usr1)=>{
-      viewingUser = usr1;
+      viewingUser = usr1.data;
       api.loadFriend(themId).then((usr2)=>{
-        viewedUser = usr2;
+        viewedUser = usr2.data;
+        console.log(viewedUser)
+        if(!viewedUser){
+          this.props.history.push('/')
+          return
+        }
         this.setState({them: viewedUser})
         this.setState({me: viewingUser})
-        console.log(viewedUser.data.topSongs);
+        console.log(viewedUser.topSongs);
         this.setState({sharedArtists:
-          this.getShared(viewingUser.data.topArtists, viewedUser.data.topArtists)
+          this.getShared(viewingUser.topArtists, viewedUser.topArtists)
         })
         this.setState({sharedSongs:
-          this.getShared(viewingUser.data.topSongs, viewedUser.data.topSongs)
+          this.getShared(viewingUser.topSongs, viewedUser.topSongs)
           
         })
 
-        console.log(this.state.sharedArtists.length)
+        
+        let x =  this.state.sharedArtists.length;
+        let y =this.state.sharedSongs.length;
+        let aP = parseInt(x/3,10);
+        let aS = parseInt(y/5,10);
+
+        if(aP == 0) this.state.score = 0;
+        else if(0 <aP<=5)this.state.score = 50 +aP*10
+        else if(aP<6.1)this.state.score = 95
+        else this.state.score = 99
+      
+        this.state.score *= 0.9 +  parseInt(y/10,10)*0.1;
+
 
         this.setState({target_dashboard: {
-          p: 70,
+          p: this.state.score,
           a: this.state.sharedArtists.length,
           b: this.state.sharedSongs.length
         }
 
         })
 
-        this.timerID = setInterval(() => this.tick2('p', 'percent'), 10);
-        this.timerID2 = setInterval(() => this.tick2('a','artistsNum'), 100);
-        this.timerID2 = setInterval(() => this.tick2('b','songsNum'), 100);
+        this.timer["p"] = setInterval(() => this.animate('p', 'percent', 'p'), 10);
+        this.timer["a"] = setInterval(() => this.animate('a','artistsNum','a'), 100);
+        this.timer["s"] = setInterval(() => this.animate('b','songsNum','s'), 100);
         
 
       })
@@ -173,14 +186,16 @@ class Shared extends Component{
     });
   }
 
-  tick2(tgt, dsp) {
+
+
+  animate(tgt, dsp, _id) {
     let X = this.state.target_dashboard[tgt];
     if(tgt == 'a')console.log(this.state[dsp])
     if(this.state[dsp] >= X){
       this.setState({
         dsp: X
       });
-      clearInterval(this.timerID2)
+      clearInterval(this.timer[_id])
     }
 
     this.setState({
@@ -358,7 +373,7 @@ return (
 
 
     { 
-      this.state.sharedSongs.slice(0,3).map(item =>{
+      this.state.sharedSongs.slice(0,this.state.results).map(item =>{
           if(item.isNull){
             return(
               <div key={item.id}></div>
@@ -377,7 +392,10 @@ return (
     </div>
 
     </div>
-    <button onClick={this.simulatedLogin} className="themed-btn shared-theme-btn">view your top 5</button>
+    
+    <button onClick={this.simulatedLogin} className="themed-btn shared-theme-btn">
+      {this.state.demo == "demo"?  <span>get started</span> : <span>Your Top 5</span>}
+    </button>
   </div>
 
 
