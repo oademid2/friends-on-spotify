@@ -11,8 +11,8 @@ class api {
     static myToken = '';
     static myUser = '';
     static theirUser = '';
-    static HOST = "localhost:3000"//
-    //static HOST = "https://floating-lake-89604.herokuapp.com"//PROD""localhost:3000"
+    //static HOST = "localhost:3000"//
+    static HOST = "https://floating-lake-89604.herokuapp.com"//PROD""localhost:3000"
     static _url = "/api/qrZtyoP";
 
     static getProfile = (tkn) =>{
