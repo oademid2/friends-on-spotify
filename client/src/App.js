@@ -21,7 +21,7 @@ function App() {
      
      <Switch>
      
-     <Route path='/demo' component={Comparison}/>
+     <Route path='/cmp/demo' component={Comparison}/>
      <Route path='/viewprofile' component={Profile}/>
        <Route path='/compare' component={Comparison}/>
        <Route path='/' component={Landing}/>

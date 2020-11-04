@@ -197,7 +197,7 @@ return (
 <div className="profile-container">
 
   <div className="profile-title-container" >
-  <a href="https://www.linkedin.com/in/kitan-ademidun-881330149/" className="my-link">created by kitan ademidun</a>
+  <a href="https://oademid2.github.io" className="my-link">created by kitan ademidun</a>
     
 
 <p className="profile-title-subcaption"> {this.state.user.display_name? this.state.user.display_name : this.state.user.username}</p>

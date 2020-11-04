@@ -21,8 +21,19 @@ class Landing extends Component{
   }
  
   componentDidMount() {
+     
+  let b = this.c (5,6,7,8,0); 
+  console.log(b);
     if(localStorage.getItem("comparison"))localStorage.removeItem("comparison")
   }
+
+c (...e)
+  {
+    console.log(e)
+  
+      return e; 
+  }
+
 
   viewProfile(){
     if(api.userIsValid()){
@@ -47,7 +58,7 @@ return (
 
         
       <div className="landing-title-container" >
-      <a href="https://www.linkedin.com/in/kitan-ademidun-881330149/" className="my-link">created by kitan ademidun</a>
+      <a href="https://oademid2.github.io" className="my-link">created by kitan ademidun</a>
 
             <div>
            

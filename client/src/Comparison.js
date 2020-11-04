@@ -107,12 +107,13 @@ class Shared extends Component{
     let themId = localStorage.getItem("comparison") || usrcomp;
     let myId = localStorage.getItem("username")
 
-    let demo = window.location.href.split("/compare/")[1]
+    let demo = window.location.href.split("/cmp/")[1]
    
     if(demo == "demo"){
       this.setState({demo: demo})
       themId = "ademidunt"
       myId = "22nrtqre3rxxue6ekzqemxbba"
+      console.log(demo)
     }else{
 
       localStorage.removeItem("comparison")
@@ -125,6 +126,7 @@ class Shared extends Component{
       viewingUser = usr1.data;
       api.loadFriend(themId).then((usr2)=>{
         viewedUser = usr2.data;
+        console.log(viewedUser)
         console.log(viewedUser)
         if(!viewedUser){
           this.props.history.push('/')
@@ -236,10 +238,10 @@ getShared(myTop, theirTop){
       //if(sharedList.length == 3)break
     }
 
-    while(sharedList.length <3){
+    /*while(sharedList.length <3){
       sharedList.push({'id':-1*sharedList.length})
-    }
-
+    }*/
+    console.log("shared", sharedList)
     return sharedList
 }
 
@@ -301,7 +303,7 @@ return (
 <div className="comparison-container">
 
   <div className="profile-title-container" >
-  <a href="https://www.linkedin.com/in/kitan-ademidun-881330149/" className="my-link">created by kitan ademidun</a>
+  <a href="https://oademid2.github.io" className="my-link">created by kitan ademidun</a>
 
 
 {this.state.demo == "demo"? 
@@ -347,30 +349,39 @@ return (
       <div className= "ranking-section-title">Your Shared Faves</div>
       <p className= "shared-section-sub">artists</p>
 
+{this.state.sharedArtists.length>0?
+<div>
+{ //Array for artists
+  this.state.sharedArtists.slice(0,this.state.results).map(item =>{
+    if(item.isNull){
+      return( <div key={item.id}></div> )
+    }else{return(
 
-      { //Array for artists
-      this.state.sharedArtists.slice(0,this.state.results).map(item =>{
-        if(item.isNull){
-          return( <div key={item.id}></div> )
-        }else{return(
+      <div className="shared-card" key={item.id}>
+      <img  src= {item.imgSrc} class="shared-card-img"></img>
+      <div className="shared-card-text">
+        <p class="shared-card-title">{item.name}</p>
+        <p class="shared-card-subtitle">Your #{item.myRank}</p>
+        <p class="shared-card-subtitle">Their #{item.theirRank}</p>
+      </div>
+      </div>
+    )}//end array
+  })}
+  </div>:
+  <p>No Shared Artists</p>
 
-          <div className="shared-card" key={item.id}>
-          <img  src= {item.imgSrc} class="shared-card-img"></img>
-          <div className="shared-card-text">
-            <p class="shared-card-title">{item.name}</p>
-            <p class="shared-card-subtitle">Your #{item.myRank}</p>
-            <p class="shared-card-subtitle">Their #{item.theirRank}</p>
-          </div>
-          </div>
-        )}//end array
-      })}
+
+}
+
+      
     </div>
 
   
     <div className="shared-section">
     <p className= "shared-section-sub">songss</p>
     
-
+    {this.state.sharedSongs.length>0?
+<div>
 
     { 
       this.state.sharedSongs.slice(0,this.state.results).map(item =>{
@@ -389,6 +400,9 @@ return (
             </div>
           )}})
     }
+    </div>:
+    <p> No Shared Songs</p>
+}
     </div>
 
     </div>
