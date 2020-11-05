@@ -194,7 +194,8 @@ copyLink = () => {
 
  viewProfile = () =>{
   if(api.userIsValid()){
-    this.props.history.push("/viewprofile/usr/"+localStorage.getItem("username"))
+    window.open("/viewprofile/usr/"+localStorage.getItem("username"), "_blank")
+    //this.props.history.push()
     return
   }
 
@@ -281,7 +282,7 @@ return (
   <button className = "themed-btn dark-green-bg" onClick={this.compare}>See similarities</button>
   
   {api.userIsValid()?<span><button onClick={()=> api.reset(this.props) } className = "themed-btn">logout</button> <button onClick={()=> api.viewProfile } className = "themed-btn">view yours</button></span> :
-  <button onClick={()=> api.viewProfile } className = "themed-btn">view yours</button> }
+  <button onClick={this.viewProfile} className = "themed-btn">view yours</button> }
 
 
   </div>)}
