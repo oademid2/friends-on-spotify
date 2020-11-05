@@ -175,7 +175,7 @@ topRankingFromDict(_dict){
   if(api.userIsValid()){   
    
       //this.props.history.push("/compare/user/"+localStorage.getItem("comparison"))
-      window.open(api.HOST+"/compare/user/"+localStorage.getItem("comparison"), "_blank")
+      window.open("/compare/user/"+localStorage.getItem("comparison"), "_blank")
       return
 
   }
@@ -270,7 +270,7 @@ return (
 (  <div className="">
 <p className="">Share your top 5 with friends and they can get a similary score of your top 50!</p>
 <p className="sharing-link"><a href="">{api.HOST}/viewprofile/usr/{localStorage.getItem("username")}</a></p>
-<a class= "themed-btn dark-green-bg" href="https://twitter.com/intent/tweet?text=Check+out+my+top+listens+on+Spotify+and+reply+to+this+tweet+with+our+percentage+score+of+our+similar+our+music+is%3A+friendsonspotify.heroku.com" target="_blank">share</a>
+<a class= "themed-btn dark-green-bg" href={"https://twitter.com/intent/tweet?text=Check+out+my+top+listens+on+Spotify+and+reply+to+this+tweet+with+our+percentage+score+of+our+similar+our+music+is%3A+"+api.HOST+"/viewprofile/usr/"+localStorage.getItem("username")} target="_blank">share</a>
 <button className = "themed-btn dark-green-bg" onClick={this.copyLink}>Copy This Link</button>
 {api.userIsValid()?<button onClick={()=> api.reset(this.props) } className = "themed-btn">logout</button> : 
  <span></span>}
