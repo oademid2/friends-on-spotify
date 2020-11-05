@@ -58,7 +58,7 @@ return (
 
         
       <div className="landing-title-container" >
-      <a href="https://oademid2.github.io" className="my-link">created by kitan ademidun</a>
+      <a href="https://oademid2.github.io" target="_blank" className="my-link">created by kitan ademidun</a>
 
             <div>
            

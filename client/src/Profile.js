@@ -211,7 +211,7 @@ return (
 <div className="profile-container">
 
   <div className="profile-title-container" >
-  <a href="https://oademid2.github.io" className="my-link">created by kitan ademidun</a>
+  <a href="https://oademid2.github.io" target="_blank" className="my-link">created by kitan ademidun</a>
     
 
 <p className="profile-title-subcaption"> {this.state.user.display_name? this.state.user.display_name : this.state.user.username}</p>
@@ -265,17 +265,17 @@ return (
 (  <div className="">
 <p className="">Share your top 5 with friends and they can get a similary score of your top 50!</p>
 <p className="sharing-link"><a href="">{api.HOST}/viewprofile/usr/{localStorage.getItem("username")}</a></p>
-<a class= "themed-btn dark-green-bg" href="https://twitter.com/intent/tweet?text=Hello%20world">tweet</a>
+<a class= "themed-btn dark-green-bg" href="https://twitter.com/intent/tweet?text=Check+out+my+top+listens+on+Spotify+and+reply+to+this+tweet+with+our+percentage+score+of+our+similar+our+music+is%3A+friendsonspotify.heroku.com" target="_blank">share</a>
 <button className = "themed-btn dark-green-bg" onClick={this.copyLink}>Copy This Link</button>
 {api.userIsValid()?<button onClick={()=> api.reset(this.props) } className = "themed-btn">logout</button> : 
-<button onClick={()=> api.viewProfile } className = "themed-btn">view yours</button> }
+ <span></span>}
 
 </div>):
   (  <div className="">
-  <p className="">Compare to your top 50 and let them send you their similarity score!</p>
-  <button className = "themed-btn dark-green-bg" onClick={this.compare}>Compare</button>
+  <p className="">Compare to your top 50 👀</p>
+  <button className = "themed-btn dark-green-bg" onClick={this.compare}>See similarities</button>
   
-  {api.userIsValid()?<button onClick={()=> api.reset(this.props) } className = "themed-btn">logout</button> : <span></span>}
+  {api.userIsValid()?<button onClick={()=> api.reset(this.props) } className = "themed-btn">logout</button> :<button onClick={()=> api.viewProfile } className = "themed-btn">view yours</button> }
 
 
   </div>)}
