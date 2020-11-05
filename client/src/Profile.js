@@ -174,7 +174,8 @@ topRankingFromDict(_dict){
   //cookie
   if(api.userIsValid()){   
    
-      this.props.history.push("/compare/user/"+localStorage.getItem("comparison"))
+      //this.props.history.push("/compare/user/"+localStorage.getItem("comparison"))
+      window.open(api.HOST+"/compare/user/"+localStorage.getItem("comparison"), "_blank")
       return
 
   }
@@ -220,7 +221,9 @@ return (
       <div className="ranking-container">
       <div className="ranking-section">
 
-      <div className= "ranking-section-title">Your Top Artists</div>
+      {api.userIsValid()&&(this.state.pageId == api.getUser())?
+      <div className= "ranking-section-title">Your Top Artists</div>:
+      <div className= "ranking-section-title">Their Top Artists</div>}
       { //Array for artists
       this.state.sharedArtists.map(item =>{
         if(item.isNull){
@@ -239,7 +242,9 @@ return (
 
   
     <div className="ranking-section">
-    <div className= "ranking-section-title">Your Top Songs</div>
+    {api.userIsValid()&&(this.state.pageId == api.getUser())?
+      <div className= "ranking-section-title">Your Top Songs</div>:
+      <div className= "ranking-section-title">Their Top Songs</div>}
     { 
       this.state.sharedSongs.map(item =>{
           if(item.isNull){
@@ -275,7 +280,8 @@ return (
   <p className="">Compare to your top 50 👀</p>
   <button className = "themed-btn dark-green-bg" onClick={this.compare}>See similarities</button>
   
-  {api.userIsValid()?<button onClick={()=> api.reset(this.props) } className = "themed-btn">logout</button> :<button onClick={()=> api.viewProfile } className = "themed-btn">view yours</button> }
+  {api.userIsValid()?<span><button onClick={()=> api.reset(this.props) } className = "themed-btn">logout</button> <button onClick={()=> api.viewProfile } className = "themed-btn">view yours</button></span> :
+  <button onClick={()=> api.viewProfile } className = "themed-btn">view yours</button> }
 
 
   </div>)}
