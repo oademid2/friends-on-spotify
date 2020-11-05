@@ -58,14 +58,15 @@ exports.callback = async function (req,res) {
 
 exports.create_profile = function (req, res,next) {
 
-    Friend.findOneAndUpdate({username: req.body.username}, {$set:{display_name:"test"}}, {returnOriginal:true}, (err, doc) => {
+    Friend.findOneAndUpdate({username: req.body.username}, {$set:{network: []}}, {returnOriginal:true}, (err, doc) => {
         console.log(doc)
         if (!doc) {
             let friend = new Friend({
                 username: req.body.username,
                 display_name: req.body.display_name,
                 topArtists: req.body.topArtists,
-                topSongs: req.body.topSongs
+                topSongs: req.body.topSongs,
+                network : []
 
             })
             console.log("new created")

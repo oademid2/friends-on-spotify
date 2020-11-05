@@ -11,6 +11,7 @@ class Shared extends Component{
    
     this.simulatedLogin = this.simulatedLogin.bind(this);
     this.copyLink = this.copyLink.bind(this);
+    this.viewProfile = this.viewProfile.bind(this);
 
     this.state = { 
       user:{
@@ -190,6 +191,19 @@ copyLink = () => {
 
  };
 
+ viewProfile = () =>{
+  if(api.userIsValid()){
+    this.props.history.push("/viewprofile/usr/"+localStorage.getItem("username"))
+    return
+  }
+
+  api.simulatedLogin().then((res)=>{
+    console.log(res.data)
+    console.log('redirecting through spotify....')
+    window.location.href = res.data
+  })
+}
+
 render(){
  
 return (
@@ -253,12 +267,14 @@ return (
 <p className="sharing-link"><a href="">{api.HOST}/viewprofile/usr/{localStorage.getItem("username")}</a></p>
 <a class= "themed-btn dark-green-bg" href="https://twitter.com/intent/tweet?text=Hello%20world">tweet</a>
 <button className = "themed-btn dark-green-bg" onClick={this.copyLink}>Copy This Link</button>
-{api.userIsValid()?<button onClick={()=> api.reset(this.props) } className = "themed-btn">logout</button> : <span></span>}
+{api.userIsValid()?<button onClick={()=> api.reset(this.props) } className = "themed-btn">logout</button> : 
+<button onClick={()=> api.viewProfile } className = "themed-btn">view yours</button> }
 
 </div>):
   (  <div className="">
   <p className="">Compare to your top 50 and let them send you their similarity score!</p>
   <button className = "themed-btn dark-green-bg" onClick={this.compare}>Compare</button>
+  
   {api.userIsValid()?<button onClick={()=> api.reset(this.props) } className = "themed-btn">logout</button> : <span></span>}
 
 

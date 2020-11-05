@@ -67,7 +67,7 @@ return (
             <img className ="landing-img" src={titleImg}></img><br></br>
             <p className="landing-caption"> How it works? When you get your top plays you get a link you can share with friends. By clicking a friends link you can sign in an automatically compare your listens that you have in common. </p>
             <Button onClick={this.viewProfile} className = "themed-btn">Get Started</Button>
-            <Button href="/cmp/demo" className = "themed-btn">view demo</Button>
+            
        
             </div>
        
@@ -79,6 +79,7 @@ return (
 
 
 //end of return
+//<Button href="/cmp/demo" className = "themed-btn">view demo</Button>
 )
 
 //end of render
