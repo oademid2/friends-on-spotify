@@ -12,7 +12,7 @@ class api {
     static myUser = '';
     static theirUser = '';
     static HOST = "localhost:3000"//
-    //static HOST = "friendsonspotify.herokuapp.com"//PROD""localhost:3000"
+    static HOST = "friendsonspotify.herokuapp.com"//PROD""localhost:3000"
     static _url = "/api/qrZtyoP";
 
     static getProfile = (tkn) =>{

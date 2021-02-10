@@ -44,10 +44,10 @@ app.use(cors({
 
 // Serve static files from the React app
   //app.use(express.static(path.join(__dirname, 'client/build')));
-  app.use(express.static(path.join(__dirname, 'client/public')));
+  app.use(express.static(path.join(__dirname, 'client/puild')));
 
   app.get('/', function (req, res) {
-    res.sendFile(path.join(__dirname, 'client/public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'client/buid', 'index.html'));
   });
 
 

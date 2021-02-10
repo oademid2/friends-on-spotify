@@ -12,6 +12,7 @@ var client_id = process.env.client_id;
 var client_secret = process.env.client_secret;
 var redirect_uri = process.env.SERVER_URL+'/callback/'; 
 
+console.log(process.env)
 //must be to a back end thing
 var spotifyApi = new SpotifyWebApi({
     clientId: client_id,

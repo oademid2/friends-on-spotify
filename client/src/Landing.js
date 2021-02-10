@@ -61,7 +61,7 @@ return (
 
             <div>
            
-            <h1 className="landing-title">FRIENDS ON SPOTIFY</h1>
+            <h1 className="landing-title">FRIENDS ON SPOTIFY V.2</h1>
             <p className="landing-caption">Find out which of your friends have the closest music taste to you 👀</p>
             <img className ="landing-img" src={titleImg}></img><br></br>
             <p className="landing-caption"> How it works? When you get your top plays you get a link you can share with friends. By clicking a friends link you can sign in an automatically compare your listens that you have in common. </p>
