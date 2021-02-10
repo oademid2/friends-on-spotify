@@ -1,50 +1,49 @@
+//Landing page
+
 import React, { Component } from 'react';
 import { Layout} from 'antd';
 import {Button } from 'antd';
 
-import './Landing.scss'
-import titleImg from './title.png'
+import './styles/Landing.scss'
+import titleImg from './images/title.png'
 import api from './api'
 
-
 const { Header} = Layout;
-
-
-
 
 class Landing extends Component{
 
   constructor(props){
+    console.log(process.env.REACT_APP_TEST)
+
     super(props);
     this.viewProfile = this.viewProfile.bind(this)
 
   }
  
   componentDidMount() {
-     
-  let b = this.c (5,6,7,8,0); 
-  console.log(b);
+
     if(localStorage.getItem("comparison"))localStorage.removeItem("comparison")
-  }
 
-c (...e)
-  {
-    console.log(e)
-  
-      return e; 
   }
 
 
+  //function for user that wants to view their profile
   viewProfile(){
-    if(api.userIsValid()){
-      this.props.history.push("/viewprofile/usr/"+localStorage.getItem("username"))
-      return
-    }
 
+    console.log(api.getUser())
+    //if user is logged in redirect to their profile.....
+    if(api.userIsLoggedIn()){
+      localStorage.setItem("mode-type", "landing-to-profile")
+      return this.props.history.push("/viewprofile/usr/"+localStorage.getItem("username"))
+    }
+    //prompt them to login....
     api.simulatedLogin().then((res)=>{
-      console.log(res.data)
-      console.log('redirecting through spotify....')
-      window.location.href = res.data
+      
+        //set mode
+        localStorage.setItem("mode-type", "landing-to-login")
+        //open spotify log in window....
+        window.location.href = res.data
+
     })
   }
 

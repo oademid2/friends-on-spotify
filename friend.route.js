@@ -11,7 +11,7 @@ router.get('/callback', friend_controller.callback);
 router.put('/api/qrZtyoP/createProfile', friend_controller.create_profile);
 router.get('/api/qrZtyoP/loadfriend/:username', friend_controller.find_profile);
 router.get('/api/qrZtyoP/loadfriend/:username', friend_controller.loadfriend);
-router.get('*', friend_controller.serve);
+//router.get('*', friend_controller.serve);
 
 
 module.exports = router;

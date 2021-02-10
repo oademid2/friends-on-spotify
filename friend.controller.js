@@ -1,45 +1,45 @@
 const Friend = require('./friend.model');
 const path = require('path');
+require('dotenv').config();
 
-//PROD
+//SPOTIFY API
 var SpotifyWebApi = require('spotify-web-api-node');
-scopes = ['user-top-read']//, 'user-read-private', 'user-read-email']//,'playlist-modify-public','playlist-modify-private']
-var DEST = "https://friendsonspotify.herokuapp.com"//"http://localhost:3000"; //'https://agile-beyond-63487.herokuapp.com'
-var HOST = "https://friendsonspotify.herokuapp.com"//""http://localhost:1234"; //'https://agile-beyond-63487.herokuapp.com'
-//var DEST = "http://localhost:3000"//"https://floating-lake-89604.herokuapp.com"//"http://localhost:3000"; //'https://agile-beyond-63487.herokuapp.com'
-//var HOST = "http://localhost:1234"//"https://floating-lake-89604.herokuapp.com"//""http://localhost:1234"; //'https://agile-beyond-63487.herokuapp.com'
+scopes = ['user-top-read']
 
-
-var client_id = "73e90db024fc4168853c3320202e37d5"; // Your client id
-var client_secret = "19426ec3794742f281b73bd1e3e82783"; // Your secret
-var redirect_uri = HOST+'/callback'; // Your redirect uri// uri that works 'http://localhost:1234/callback'
+//load enviroment varaibles
+var DEST = process.env.FRONTEND_URL;
+var client_id = process.env.client_id;
+var client_secret = process.env.client_secret;
+var redirect_uri = process.env.SERVER_URL+'/callback/'; 
 
 //must be to a back end thing
 var spotifyApi = new SpotifyWebApi({
     clientId: client_id,
     clientSecret: client_secret,
     redirectUri: redirect_uri,
-  });
+});
 
-  exports.test = function (req, res){
+exports.test = function (req, res){
     res.json(["pas"]);
-  };
+};
 
 ///client/build/index.html
 exports.serve = function (req, res){
+
     res.sendFile(path.join(__dirname+'/client/build/index.html'));
   };
 
-///build/client/index.html'
 exports.login = function(req,res,next){
     var html = spotifyApi.createAuthorizeURL(scopes)
+    console.log(html)
     res.send(html+"&show_dialog=true")  
-    //res.redirect(html+"&show_dialog=true")
 }
 
 
 exports.callback = async function (req,res) {
     const { code } = req.query;
+
+    console.log(code)
 
     try {
       var data = await spotifyApi.authorizationCodeGrant(code)
